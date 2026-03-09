@@ -1,0 +1,94 @@
+Table departamento {
+  id_departamento int [pk, increment]
+  nome varchar(120) [not null, unique]
+  sigla varchar(20) [not null, unique]
+}
+
+Table curso {
+  id_curso int [pk, increment]
+  nome varchar(150) [not null, unique]
+  carga_horaria_total int [not null]
+  id_departamento int [not null, ref: > departamento.id_departamento]
+}
+
+Table aluno {
+  id_aluno int [pk, increment]
+  ra varchar(30) [not null, unique]
+  nome varchar(150) [not null]
+  email varchar(150) [not null, unique]
+  cpf varchar(14) [unique]
+  data_nascimento date
+  status_curso varchar(20) [not null, note: 'ativo, trancado, formado']
+  id_curso int [not null, ref: > curso.id_curso]
+}
+
+Table professor {
+  id_professor int [pk, increment]
+  matricula_funcional varchar(30) [not null, unique]
+  nome varchar(150) [not null]
+  email varchar(150) [not null, unique]
+  cpf varchar(14) [unique]
+  titulacao varchar(80)
+}
+
+Table disciplina {
+  id_disciplina int [pk, increment]
+  codigo varchar(30) [not null, unique]
+  nome varchar(150) [not null]
+  ementa text
+  carga_horaria int [not null]
+  creditos int [not null]
+}
+
+Table curso_disciplina {
+  id_curso int [not null, ref: > curso.id_curso]
+  id_disciplina int [not null, ref: > disciplina.id_disciplina]
+  periodo_sugerido int
+  obrigatoria boolean [not null, default: true]
+
+  indexes {
+    (id_curso, id_disciplina) [pk]
+  }
+}
+
+Table disciplina_prerequisito {
+  id_disciplina int [not null, ref: > disciplina.id_disciplina]
+  id_disciplina_prerequisito int [not null, ref: > disciplina.id_disciplina]
+
+  indexes {
+    (id_disciplina, id_disciplina_prerequisito) [pk]
+  }
+}
+
+Table turma {
+  id_turma int [pk, increment]
+  id_disciplina int [not null, ref: > disciplina.id_disciplina]
+  id_professor int [not null, ref: > professor.id_professor]
+  ano int [not null]
+  semestre int [not null, note: '1 ou 2']
+  capacidade_vagas int [not null]
+  status_turma varchar(20) [not null, note: 'planejada, aberta, encerrada']
+}
+
+Table turma_horario {
+  id_turma_horario int [pk, increment]
+  id_turma int [not null, ref: > turma.id_turma]
+  dia_semana varchar(20) [not null]
+  hora_inicio time [not null]
+  hora_fim time [not null]
+  local varchar(120) [not null]
+}
+
+Table matricula {
+  id_matricula int [pk, increment]
+  id_aluno int [not null, ref: > aluno.id_aluno]
+  id_turma int [not null, ref: > turma.id_turma]
+  data_matricula date [not null]
+  status_matricula varchar(20) [not null, note: 'matriculado, cancelado, aprovado, reprovado, trancado']
+  nota_final decimal(4,2)
+  frequencia decimal(5,2)
+
+  indexes {
+    (id_aluno, id_turma) [unique]
+  }
+}
