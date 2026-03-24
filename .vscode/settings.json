@@ -1,6 +1,6 @@
 {
 //   "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
-"python.defaultInterpreterPath": "/home/jeffharris/mba_mackenzie/envs/pyenv/prepenv/bin/python",
+// "python.defaultInterpreterPath": "/home/jeffharris/mba_mackenzie/envs/pyenv/prepenv/bin/python",
   "python.testing.pytestArgs": ["${workspaceFolder}/tests"],
   "terminal.integrated.cwd": "${workspaceFolder}",
   "makefile.configureOnOpen": false

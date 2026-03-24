@@ -1,0 +1,1 @@
+-- DDL do schema analitico (DW).
