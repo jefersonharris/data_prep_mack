@@ -1,0 +1,33 @@
+# Arquivos de Sistema Operacional (Windows/Mac)
+.DS_Store
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Arquivos de configuração do VS Code (Locais do usuário)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Variáveis de Ambiente e Segredos
+.env
+.env.*
+*.secret
+credentials.json
+
+# Arquivos de Log
+*.log
+logs/
+
+# Pastas de dados locais do banco
+data/
+pgdata/
+postgres-data/
+
+# Arquivos temporários e de swap de editores
+*~
+*.swp
+*.swo
